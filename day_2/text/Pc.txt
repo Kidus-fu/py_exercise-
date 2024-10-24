@@ -1,0 +1,5 @@
+Product Name: Pc
+Product price: 1298$
+Tax: 39$
+Total price: 4011$
+Quantity: 3
