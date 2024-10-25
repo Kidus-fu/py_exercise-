@@ -1,0 +1,5 @@
+Product Name: T-shirt
+Product price: 16$
+Tax: 1$
+Total price: 51$
+Quantity: 3

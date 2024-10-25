@@ -1,156 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Product Display</title>
     <style>
-        /* Global Styling */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+      /* Global Styling */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-        /* Body Styling */
-        body {
-            font-family: 'Poppins', Arial, sans-serif;
-            background-color: #f0f0f0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            padding: 20px;
-        }
+      /* Body Styling */
+      body {
+        font-family: "Poppins", Arial, sans-serif;
+        background-color: #f0f0f0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        padding: 20px;
+      }
 
-        /* Header Styling */
-        header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
+      /* Header Styling */
+      header {
+        text-align: center;
+        margin-bottom: 40px;
+      }
 
-        header h1 {
-            font-size: 2.5rem;
-            color: #333;
-            margin-bottom: 10px;
-        }
+      header h1 {
+        font-size: 2.5rem;
+        color: #333;
+        margin-bottom: 10px;
+      }
 
-        header p {
-            color: #777;
-            font-size: 1.2rem;
-        }
+      header p {
+        color: #777;
+        font-size: 1.2rem;
+      }
 
-        /* Image Styling */
+      /* Image Styling */
+      img {
+        width: 300px;
+        height: auto;
+        margin-bottom: 20px;
+        box-shadow: 0 8px 6px rgba(83, 83, 83, 0.2);
+        border-radius: 10px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      /* Zoom Effect for Image */
+      img:hover {
+        transform: scale(2);
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
+      }
+
+      /* Media Query for Mobile Responsiveness */
+      @media (max-width: 768px) {
         img {
-            width: 300px;
-            height: auto;
-            margin-bottom: 20px;
-            box-shadow: 0 8px 6px rgba(83, 83, 83, 0.2);
-            border-radius: 10px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+          width: 100%;
         }
 
-        /* Zoom Effect for Image */
-        img:hover {
-            transform: scale(2);
-            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
-        }
-
-        /* Iframe Styling */
         iframe {
-            font-family: monospace;
-            width: 80%;
-            height: 300px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-            background-color: white;
-            padding: 20px;
-            margin-bottom: 20px;
-            overflow: auto;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+          width: 95%;
         }
-
-        /* Zoom Effect for Iframe */
-        iframe:hover {
-            transform: scale(1.05);
-            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
-        }
-
-        /* Button Styling */
-        .btn {
-            padding: 12px 24px;
-            font-size: 1rem;
-            color: #fff;
-            background-color: #3498db;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            margin-right: 10px;
-        }
-
-        .btn:hover {
-            background-color: #2980b9;
-        }
-
-        /* Second Button Styling */
-        .btn-secondary {
-            padding: 12px 24px;
-            font-size: 1rem;
-            color: #fff;
-            background-color: #e74c3c;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        .btn-secondary:hover {
-            background-color: #c0392b;
-        }
-
-        /* Media Query for Mobile Responsiveness */
-        @media (max-width: 768px) {
-            img {
-                width: 100%;
-            }
-
-            iframe {
-                width: 95%;
-            }
-        }
+      }
     </style>
-</head>
-<body>
-
+  </head>
+  <body>
     <h1>Product Information</h1>
-    <img id="product-image" src="" alt="Product Image">
+    <img id="product-image" src="" alt="Product Image" />
     <pre id="product-details"></pre>
 
     <script>
-        // Function to load product data
-        async function loadProductData(productName) {
-            try {
-                // Fetch the image
-                const image = document.getElementById('product-image');
-                image.src = `media/${productName}.png`;  // Set the image source
+      // Function to load product data
+      async function loadProductData(productName) {
+        try {
+          // Fetch the image
+          const image = document.getElementById("product-image");
+          image.src = `media/${productName}.png`; // Set the image source
 
-                // Fetch the text file
-                const response = await fetch(`text/${productName}.txt`);
-                if (!response.ok) throw new Error('File not found');
-                const text = await response.text();
-                document.getElementById('product-details').textContent = text;  // Display the text in a <pre> element
-            } catch (error) {
-                console.error('Error loading product data:', error);
-            }
+          // Fetch the text file
+          const response = await fetch(`text/${productName}.txt`);
+          if (!response.ok) throw new Error("File not found");
+          const text = await response.text();
+          document.getElementById("product-details").textContent = text; // Display the text in a <pre> element
+        } catch (error) {
+          console.error("Error loading product data:", error);
         }
-
-        // Call the function with the product name
-        const productName = prompt("Enter the product name:");  // Ask for product name
-        loadProductData(productName);
+      }
+      // Call the function with the product name
+      const productName = prompt("Enter the product name:"); // Ask for product name
+      loadProductData(productName);
     </script>
-
-</body>
+  </body>
 </html>

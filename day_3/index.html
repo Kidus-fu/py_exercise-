@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Display</title>
+    <style>
+        /* Style reset */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Background styling */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #83a4d4, #b6fbff);
+            font-family: 'Arial', sans-serif;
+            color: #333;
+            overflow: hidden;
+        }
+
+        /* Container styling */
+        .container {
+            text-align: center;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            max-width: 350px;
+            width: 90%;
+            transform: scale(0);
+            animation: popIn 1s forwards 0.3s;
+        }
+
+        /* QR Code image */
+        img {
+            width: 100%;
+            max-width: 300px;
+            height: auto;
+            border: 4px solid #333;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Heading styling */
+        h1 {
+            font-size: 24px;
+            color: #333;
+            margin: 15px 0;
+            animation: fadeIn 1.5s ease forwards 0.5s;
+            opacity: 0;
+        }
+
+        /* Instructions styling */
+        .message {
+            font-size: 16px;
+            color: #666;
+            margin: 10px 0 20px;
+            opacity: 0;
+            animation: fadeIn 1.5s ease forwards 0.8s;
+        }
+
+        /* Button styling */
+        .button {
+            padding: 12px 24px;
+            font-size: 16px;
+            font-weight: bold;
+            color: #ffffff;
+            background-color: #1d72b8;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+            opacity: 0;
+            animation: fadeIn 1.5s ease forwards 1.1s;
+            margin: 10px;
+        }
+
+        .button:hover {
+            background-color: #155a8a;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            transform: scale(1.05);
+        }
+
+        .button:active {
+            background-color: #0d3d62;
+            transform: scale(0.95);
+        }
+
+        /* Keyframes */
+        @keyframes popIn {
+            0% { transform: scale(0); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        /* Hide file input */
+        #fileInput {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img id="QR" src="" alt="QR Code Image">
+        <h1>Scan Your QR Code</h1>
+        <p class="message" id="message">Select or upload your QR code image below.</p>
+        <button onclick="document.getElementById('fileInput').click()" class="button">Upload QR Code</button>
+        <button onclick="location.reload()" class="button">Reload</button>
+        <input type="file" id="fileInput" accept="image/*" onchange="loadImage(event)">
+    </div>
+
+    <script>
+        // Function to load selected QR code image
+        function loadImage(event) {
+            const img = document.getElementById('QR');
+            const message = document.getElementById('message');
+            const file = event.target.files[0];
+
+            if (file) {
+                img.src = URL.createObjectURL(file);
+                message.textContent = "QR Code loaded successfully!";
+                message.style.color = "green";
+            } else {
+                message.textContent = "No file selected. Please try again!";
+                message.style.color = "red";
+            }
+        }
+    </script>
+</body>
+</html>
